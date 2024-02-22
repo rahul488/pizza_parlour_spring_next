@@ -17,7 +17,7 @@ import java.util.function.Function;
 public class JwtUtil {
 
     private static final String SECRET_KEY = "afafasfafafasfasfasfafacasdasfasxASFACASDFACASDFASFASFDAFASFASDAADSCSDFADCVSGCFVADXCcadwavfsfarvf";
-    private static final long EXPIRATION_TIME = 24*60*60*1000; // 1 days
+    private static final long EXPIRATION_TIME = 24*10*60*60*1000; // 10 days
 
     public String generateToken(UserDetails userDetails) {
         Map<String, Object> claims = new HashMap<>();

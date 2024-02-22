@@ -25,6 +25,8 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.*;
 
 @Service
@@ -43,8 +45,6 @@ public class ProductService {
     private DealsRepo dealsRepo;
 
     private static final Logger logger = LoggerFactory.getLogger(ProductService.class);
-
-    private final String folderLocation = "D:/PProjects/resturant/backend/backend/src/main/resources/static/";
 
     public CommonResponse<?> addProduct(ProductRequestDto productDto) throws CustomException, IOException {
         Product product = new Product();
@@ -406,9 +406,15 @@ public class ProductService {
     }
 
     public String uploadImage(MultipartFile file) throws IOException{
-        String filePath = folderLocation+ file.getOriginalFilename();
-        file.transferTo(new File(filePath));
-        return filePath;
+        String uploadDir = "src/main/resources/static/images";
+        Path uploadPath = Paths.get(uploadDir);
+        if(!Files.exists(uploadPath)){
+            Files.createDirectories(uploadPath);
+        }
+        String fileName = file.getOriginalFilename();
+        Path filePath = uploadPath.resolve(fileName);
+        Files.copy(file.getInputStream(),filePath);
+        return filePath.toString();
     }
     public ResponseEntity<byte[]> getImage(UUID id) throws IOException {
         Product product = productRepo.findById(id).orElse(null);

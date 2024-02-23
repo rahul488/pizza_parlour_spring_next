@@ -466,15 +466,15 @@ public class ProductService {
                 .headers(headers)
                 .body(images);
     }
-
+    //http://localhost:8080/pizza-parlour/public/img/"+id
     public String getProductImage(UUID id){
-        return "http://localhost:8080/pizza-parlour/public/img/"+id;
+        return "https://pizza-parlour.onrender.com/pizza-parlour/public/img/"+id;
     }
     public String getBannerImages(UUID id){
-        return "http://localhost:8080/pizza-parlour/public/bnrImg/"+id;
+        return "https://pizza-parlour.onrender.com/pizza-parlour/public/bnrImg/"+id;
     }
     public String getCategoryImages(UUID id){
-        return "http://localhost:8080/pizza-parlour/public/ctgImg/"+id;
+        return "https://pizza-parlour.onrender.com/pizza-parlour/public/ctgImg/"+id;
     }
 
 }
